@@ -1,5 +1,6 @@
-import modcam
 from setuptools import setup
+
+import modcam
 
 setup(
     name="ModCam",
@@ -18,6 +19,6 @@ setup(
     ],
     entry_points="""
         [console_scripts]
-        modcam=modcam.main:modcam
+        modcam=modcam.main:main
     """,
 )

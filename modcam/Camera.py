@@ -32,5 +32,8 @@ class Camera:
         self.r, self.a = rot_alt(self.r, self.a, np.deg2rad(alt))
         self.r, self.a = rot_az(self.r, self.a, np.deg2rad(az))
 
-    def plot(self):
-        plt.polar(self.a, np.rad2deg(self.r))
+    def plot(self, fig=None):
+        ax = plt.axes(projection="polar") if fig is None else fig
+        ax.plot(self.a, np.rad2deg(self.r))
+        if fig is None:
+            plt.show()
