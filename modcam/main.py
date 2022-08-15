@@ -2,7 +2,6 @@
 
 import click
 import matplotlib.pyplot as plt
-
 import modcam
 
 
@@ -26,12 +25,17 @@ def main(filename):
             h = float(h)
             alt = float(alt)
             az = float(az)
-            if theta == "H":
-                theta = 0
-            elif theta == "V":
-                theta = 90
-            else:
-                theta = float(theta)
+            match theta:
+                case "H":
+                    theta = 0
+                case "V":
+                    theta = 90
+                case "h":
+                    theta = -az
+                case "v":
+                    theta = 90 - az
+                case _:
+                    theta = float(theta)
 
         except ValueError:
             raise ValueError(f"Badly formed line {i} in input")
