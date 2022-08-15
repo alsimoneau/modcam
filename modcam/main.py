@@ -40,5 +40,5 @@ def main(filename):
         except ValueError:
             raise ValueError(f"Badly formed line {i} in input")
 
-        cam = modcam.Camera(f, lt, w, h).rotate(alt, az, theta).plot(ax)
+        modcam.Camera(f, lt, w, h).rotate(alt, az, theta).plot(ax)
     plt.show()
