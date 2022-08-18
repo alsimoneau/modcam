@@ -9,3 +9,10 @@ lens_types = dict(
     equisolid=lambda x, f: 2 * np.arcsin(np.where(x / 2 >= f, 1, x / 2 / f)),
     orthographic=lambda x, f: np.arcsin(np.where(x >= f, 1, x / f)),
 )
+
+aliases = (
+    ("standard", "rectilinear"),
+    ("fisheye", "quidistant"),
+)
+for alias, base in aliases:
+    lens_types[alias] = lens_types[base]
