@@ -8,7 +8,7 @@ from .rotation import rot_alt, rot_az, square_pts
 
 
 def radial(x, *c):
-    return sum((ci * x ** i for i, ci in enumerate(c[1:], 2)), c[0] * x)
+    return sum((ci * x**i for i, ci in enumerate(c[1:], 2)), c[0] * x)
 
 
 class Camera:
@@ -51,9 +51,10 @@ class Camera:
         self.r, self.a = rot_az(self.r, self.a, np.deg2rad(az))
         return self
 
-    def plot(self, fig=None):
+    def plot(self, fig=None, fill=0):
         ax = plt.axes(projection="polar") if fig is None else fig
         ax.plot(self.a, np.rad2deg(self.r))
+        ax.fill(self.a, np.rad2deg(self.r), "k", alpha=fill)
         if fig is None:
             plt.show()
         return self
