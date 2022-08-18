@@ -8,18 +8,25 @@ from .rotation import rot_alt, rot_az, square_pts
 
 
 def radial(x, *c):
-    return sum((ci * x**i for i, ci in enumerate(c[1:], 2)), c[0] * x)
+    return sum((ci * x ** i for i, ci in enumerate(c[1:], 2)), c[0] * x)
 
 
 class Camera:
-    def __init__(self, focal_length, lens_type, sensor_width, sensor_height):
+    def __init__(
+        self,
+        focal_length,
+        lens_type,
+        sensor_width,
+        sensor_height,
+        n=1000,
+    ):
         if type(lens_type) is str and lens_type not in lens_types:
             raise ValueError("Not a known lens type.")
 
         w = sensor_width / 2
         h = sensor_height / 2
 
-        x, y = square_pts(1000)
+        x, y = square_pts(n)
         x *= w
         y *= h
 

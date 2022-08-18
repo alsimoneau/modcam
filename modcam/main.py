@@ -3,12 +3,22 @@
 import click
 import matplotlib.pyplot as plt
 import modcam
+import numpy as np
 
 
 @click.command()
 @click.argument("filename", type=click.File("r"))
-def main(filename):
+@click.argument(
+    "n",
+    required=False,
+    default=1000,
+    help="Computation resolution [default:1000]",
+)
+@click.option("-h", "--horizon", is_flag=True, help="Draws the horizon")
+def main(filename, n, horizon):
     ax = plt.axes(projection="polar")
+    if horizon:
+        plt.plot(np.linspace(0, 2 * np.pi, n), np.ones(n) * 90, "k--")
 
     for i, line in enumerate(filename):
         line = line.split("#", 1)[0].strip()
@@ -40,5 +50,5 @@ def main(filename):
         except ValueError:
             raise ValueError(f"Badly formed line {i} in input")
 
-        modcam.Camera(f, lt, w, h).rotate(alt, az, theta).plot(ax)
+        modcam.Camera(f, lt, w, h, n=n).rotate(alt, az, theta).plot(ax)
     plt.show()
