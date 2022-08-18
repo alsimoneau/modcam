@@ -8,13 +8,12 @@ import numpy as np
 
 @click.command()
 @click.argument("filename", type=click.File("r"))
-@click.argument(
-    "n",
-    required=False,
+@click.option(
+    "-n",
     default=1000,
-    help="Computation resolution [default:1000]",
+    help="Computation resolution. [default:1000]",
 )
-@click.option("-h", "--horizon", is_flag=True, help="Draws the horizon")
+@click.option("-h", "--horizon", is_flag=True, help="Draws the horizon.")
 def main(filename, n, horizon):
     ax = plt.axes(projection="polar")
     if horizon:
